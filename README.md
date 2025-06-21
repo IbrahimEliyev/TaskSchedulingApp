@@ -1,6 +1,6 @@
 # TaskSchedulingApp
 
-**TaskSchedulingApp** is an ASP.NET Core Web API designed to streamline task scheduling and management for teams. It enables users to create, assign, and track tasks, set personalized alarms, and receive real-time notifications. The application supports advanced authorization with roles and custom policies for secure operations and is built with a focus on scalability and maintainability, tailored for team collaboration in a professional environment.
+**TaskSchedulingApp** is an ASP.NET Core Web API designed to streamline task scheduling and management for teams. It enables users to create, assign, reject, and track tasks, set personalized(and group) alarms, and receive real-time notifications. The application supports advanced authorization with roles and custom policies for secure operations and is built with a focus on scalability and maintainability, tailored for team collaboration.
 
 ---
 
@@ -30,7 +30,7 @@
   - `TaskCreator`: Restricts task creation, updating, and deletion to the user who created the task.
   - `TeamMember`: Allows users assigned to a task to perform actions like setting personal alarms or rejecting task assignments.
 
-- Policies are enforced via a custom authorization handler for fine-grained access control.
+- Policies are enforced via a custom authorization handler for high-level access control.
 
 ### Swagger Documentation
 - Provides API documentation via Swagger UI.
@@ -49,6 +49,6 @@
 - Entity Framework Core
 - SQL Server
 - ASP.NET Core Identity (for JWT authentication)
-- SignalR (for real-time notifications)
+- SignalR (for real-time notifications and groups)
 - Serilog (for logging)
 - Swagger/OpenAPI (for API documentation)
