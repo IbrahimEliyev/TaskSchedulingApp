@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TaskSchedulingApp</name>
+    </assembly>
+    <members>
+        <member name="T:TaskSchedulingApp.Controllers.AuthController">
+            <summary>
+            Controller for handling user authentication and registration.
+            </summary>
+        </member>
+        <member name="M:TaskSchedulingApp.Controllers.AuthController.Register(TaskSchedulingApp.DTOs.RegisterDto)">
+            <summary>
+            Registers a new user with the specified role (TeamLead or Developer).
+            </summary>
+            <param name="model">The registration data in <see cref="T:TaskSchedulingApp.DTOs.RegisterDto"/> format.</param>
+            <returns>A success message if registration is successful.</returns>
+            <response code="200">User registered successfully.</response>
+            <response code="400">Invalid role or registration data provided.</response>
+        </member>
+        <member name="M:TaskSchedulingApp.Controllers.AuthController.Login(TaskSchedulingApp.DTOs.LoginDto)">
+            <summary>
+            Authenticates a user and returns a JWT token.
+            </summary>
+            <param name="model">The login credentials in <see cref="T:TaskSchedulingApp.DTOs.LoginDto"/> format.</param>
+            <returns>A JWT token if authentication is successful.</returns>
+            <response code="200">Authentication successful, returns JWT token.</response>
+            <response code="401">Invalid username or password.</response>
+        </member>
+        <member name="T:TaskSchedulingApp.Controllers.TasksController">
+            <summary>
+            Controller for managing tasks in the Task Scheduling application.
+            </summary>
+        </member>
+        <member name="M:TaskSchedulingApp.Controllers.TasksController.GetAll">
+            <summary>
+            Retrieves all tasks assigned to or created by the authenticated user.
+            </summary>
+            <returns>A list of tasks in <see cref="T:TaskSchedulingApp.DTOs.TaskResponseDto"/> format.</returns>
+            <response code="200">Returns the list of tasks.</response>
+            <response code="404">No tasks found for the user.</response>
+            <response code="500">Internal server error occurred.</response>
+        </member>
+        <member name="M:TaskSchedulingApp.Controllers.TasksController.GetById(System.Guid)">
+            <summary>
+            Retrieves a specific task by its ID, if the user is a team member.
+            </summary>
+            <param name="id">The unique identifier of the task.</param>
+            <returns>The task details in <see cref="T:TaskSchedulingApp.DTOs.TaskResponseDto"/> format.</returns>
+            <response code="200">Returns the task details.</response>
+            <response code="404">Task not found or user not authorized.</response>
+            <response code="500">Internal server error occurred.</response>
+        </member>
+        <member name="M:TaskSchedulingApp.Controllers.TasksController.Create(TaskSchedulingApp.DTOs.CreateTaskDto)">
+            <summary>
+            Creates a new task, restricted to users with the TeamLead role.
+            </summary>
+            <param name="taskDto">The task creation data in <see cref="T:TaskSchedulingApp.DTOs.CreateTaskDto"/> format.</param>
+            <returns>The created task in <see cref="T:TaskSchedulingApp.DTOs.TaskResponseDto"/> format.</returns>
+            <response code="201">Task created successfully.</response>
+            <response code="400">Invalid task data provided.</response>
+            <response code="500">Internal server error occurred.</response>
+        </member>
+        <member name="M:TaskSchedulingApp.Controllers.TasksController.Update(System.Guid,TaskSchedulingApp.DTOs.UpdateTaskDto)">
+            <summary>
+            Updates an existing task, restricted to the team member(either task creator or assignee).
+            </summary>
+            <param name="id">The unique identifier of the task to update.</param>
+            <param name="taskDto">The updated task data in <see cref="T:TaskSchedulingApp.DTOs.UpdateTaskDto"/> format.</param>
+            <returns>The updated task in <see cref="T:TaskSchedulingApp.DTOs.TaskResponseDto"/> format.</returns>
+            <response code="200">Task updated successfully.</response>
+            <response code="400">Invalid task data or due date in the past.</response>
+            <response code="404">Task not found or user not authorized.</response>
+        </member>
+        <member name="M:TaskSchedulingApp.Controllers.TasksController.Delete(System.Guid)">
+            <summary>
+            Deletes a task by its ID, restricted to the task creator.
+            </summary>
+            <param name="id">The unique identifier of the task to delete.</param>
+            <returns>No content if deletion is successful.</returns>
+            <response code="204">Task deleted successfully.</response>
+            <response code="404">Task not found or user not authorized.</response>
+            <response code="500">Internal server error occurred.</response>
+        </member>
+        <member name="M:TaskSchedulingApp.Controllers.TasksController.RejectTask(System.Guid)">
+            <summary>
+            Rejects a task assignment, restricted to developers who are team members.
+            </summary>
+            <param name="id">The unique identifier of the task to reject.</param>
+            <returns>No content if rejection is successful.</returns>
+            <response code="204">Task rejected successfully.</response>
+            <response code="401">User not authenticated.</response>
+            <response code="403">User not authorized to reject the task.</response>
+            <response code="404">Task or assignment not found.</response>
+            <response code="500">Internal server error occurred.</response>
+        </member>
+        <member name="T:TaskSchedulingApp.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:TaskSchedulingApp.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:TaskSchedulingApp.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:TaskSchedulingApp.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
